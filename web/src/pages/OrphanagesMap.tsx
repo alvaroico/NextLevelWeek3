@@ -24,7 +24,8 @@ function OrphanageMap() {
         </footer>
       </aside>
       <Map center={[-21.1572213, -47.7341727]} zoom={15} style={{ width: '100%', height: "100%" }}>
-        <TileLayer url={`${process.env.REACT_APP_MAPBOX_TOKEN}`} />
+        {/* <TileLayer url={`${process.env.REACT_APP_MAPBOX_TOKEN}`} /> */}
+        <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       </Map>
       <Link to="" className="create-orphanage" >
         <FiPlus size={32} color="#FFF" />
