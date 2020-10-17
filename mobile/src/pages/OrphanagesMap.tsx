@@ -4,41 +4,48 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Feather } from '@expo/vector-icons';
 
 import mapMarker from '../images/map-marker.png';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function OrphanagesMap() {
-  return(
-    <View style={styles.container}>
-    <MapView provider={PROVIDER_GOOGLE} style={styles.map} initialRegion={{
-      latitude: -21.1572213,
-      longitude: -47.7341727,
-      latitudeDelta: 0.008,
-      longitudeDelta: 0.008,
-    }} >
-      <Marker icon={mapMarker}
-        calloutAnchor={{
-          x: 3.2,
-          y: 0.8,
+  const navigation = useNavigation();
+  function handleNavigateToOrphanageDetails() {
+    navigation.navigate('OrphanageDetails')
+  }
 
-        }}
-        coordinate={{
-          latitude: -21.1572213,
-          longitude: -47.7341727,
-        }} >
-        <Callout tooltip={true} onPress={() => { alert('oi') }}>
-          <View style={styles.calloutContainer}>
-            <Text style={styles.calloutText} >{"Lar das Meninas"}</Text>
-          </View>
-        </Callout>
-      </Marker>
-    </MapView>
-    <View style={styles.footer}>
-      <Text style={styles.footerText}>{"2 Orfanatos encontrados"}</Text>
-      <TouchableOpacity style={styles.createOrphanageButton} onPress={() => { }} >
-        <Feather name="plus" size={20} color="#FFF" />
-      </TouchableOpacity>
-    </View>
-  </View >
+
+  return (
+    <View style={styles.container}>
+      <MapView provider={PROVIDER_GOOGLE} style={styles.map} initialRegion={{
+        latitude: -21.1572213,
+        longitude: -47.7341727,
+        latitudeDelta: 0.008,
+        longitudeDelta: 0.008,
+      }} >
+        <Marker icon={mapMarker}
+          calloutAnchor={{
+            x: 3.2,
+            y: 0.8,
+
+          }}
+          coordinate={{
+            latitude: -21.1572213,
+            longitude: -47.7341727,
+          }} >
+          <Callout tooltip onPress={(handleNavigateToOrphanageDetails)}>
+            <View style={styles.calloutContainer}>
+              <Text style={styles.calloutText} >{"Lar das Meninas"}</Text>
+            </View>
+          </Callout>
+        </Marker>
+      </MapView>
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>{"2 Orfanatos encontrados"}</Text>
+        <TouchableOpacity style={styles.createOrphanageButton} onPress={() => { }} >
+          <Feather name="plus" size={20} color="#FFF" />
+        </TouchableOpacity>
+      </View>
+    </View >
   )
 }
 
