@@ -9,7 +9,7 @@ import { RectButton } from "react-native-gesture-handler";
 import api from "../services/api";
 
 interface Orphanage {
-  id: string;
+  id: number;
   name: string;
   latitude: number;
   longitude: number;
@@ -25,8 +25,8 @@ export default function OrphanagesMap() {
     });
   }, []);
 
-  function handleNavigateToOrphanageDetails() {
-    navigation.navigate("OrphanageDetails");
+  function handleNavigateToOrphanageDetails(id: number) {
+    navigation.navigate("OrphanageDetails", { id });
   }
   function handleNavigateToCreateOrphanage() {
     navigation.navigate("SelectMapPosition");
@@ -45,7 +45,7 @@ export default function OrphanagesMap() {
         }}
       >
         {orphanages.map((orphanage) => {
-          console.log(orphanage)
+          console.log(orphanage);
           return (
             <Marker
               key={orphanage.id}
@@ -59,7 +59,10 @@ export default function OrphanagesMap() {
                 longitude: orphanage.longitude,
               }}
             >
-              <Callout tooltip onPress={handleNavigateToOrphanageDetails}>
+              <Callout
+                tooltip
+                onPress={() => handleNavigateToOrphanageDetails(orphanage.id)}
+              >
                 <View style={styles.calloutContainer}>
                   <Text style={styles.calloutText}>{orphanage.name}</Text>
                 </View>
@@ -69,7 +72,7 @@ export default function OrphanagesMap() {
         })}
       </MapView>
       <View style={styles.footer}>
-        <Text style={styles.footerText}>{"2 Orfanatos encontrados"}</Text>
+        <Text style={styles.footerText}>{`${orphanages.length} Orfanatos encontrados`}</Text>
         <RectButton
           style={styles.createOrphanageButton}
           onPress={handleNavigateToCreateOrphanage}
