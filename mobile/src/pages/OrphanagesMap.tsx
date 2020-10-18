@@ -45,7 +45,6 @@ export default function OrphanagesMap() {
         }}
       >
         {orphanages.map((orphanage) => {
-          console.log(orphanage);
           return (
             <Marker
               key={orphanage.id}
