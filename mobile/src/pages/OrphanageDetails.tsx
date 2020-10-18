@@ -58,24 +58,15 @@ export default function OrphanageDetails() {
     <ScrollView style={styles.container}>
       <View style={styles.imagesContainer}>
         <ScrollView horizontal pagingEnabled>
-          <Image
-            style={styles.image}
-            source={{
-              uri: "https://fmnova.com.br/images/noticias/safe_image.jpg",
-            }}
-          />
-          <Image
-            style={styles.image}
-            source={{
-              uri: "https://fmnova.com.br/images/noticias/safe_image.jpg",
-            }}
-          />
-          <Image
-            style={styles.image}
-            source={{
-              uri: "https://fmnova.com.br/images/noticias/safe_image.jpg",
-            }}
-          />
+          {orphanage.images.map((image) => {
+            return (
+              <Image
+                key={image.id}
+                style={styles.image}
+                source={{ uri: image.url }}
+              />
+            );
+          })}
         </ScrollView>
       </View>
 
@@ -119,7 +110,9 @@ export default function OrphanageDetails() {
         <View style={styles.scheduleContainer}>
           <View style={[styles.scheduleItem, styles.scheduleItemBlue]}>
             <Feather name="clock" size={40} color="#2AB5D1" />
-            <Text style={[styles.scheduleText, styles.scheduleTextBlue]}>{`Segunda à Sexta ${orphanage.opening_hours}`}</Text>
+            <Text
+              style={[styles.scheduleText, styles.scheduleTextBlue]}
+            >{`Segunda à Sexta ${orphanage.opening_hours}`}</Text>
           </View>
           <View style={[styles.scheduleItem, styles.scheduleItemGreen]}>
             <Feather name="info" size={40} color="#39CC83" />
